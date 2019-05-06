@@ -16,15 +16,15 @@ public class GunController : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        if(isFiring) {
-            shotCounter -= Time.deltaTime;
-            if(shotCounter <= 0) {
-                shotCounter = timeBetweenShot;
-                BulletController newBullet = Instantiate(bullet, firePoint.position, firePoint.rotation) as BulletController;
-                newBullet.speed = bulletSpeed;
-            } else {
-                shotCounter = 0;
-            }
-        }
+		if (isFiring) {
+			shotCounter -= Time.deltaTime;
+			if (shotCounter <= 0) {
+				shotCounter = timeBetweenShot;
+				BulletController newBullet = Instantiate (bullet, firePoint.position, firePoint.rotation) as BulletController;
+				newBullet.speed = bulletSpeed;
+			}
+		} else if (shotCounter != 0) {
+			shotCounter = 0;
+		}
     }
 }

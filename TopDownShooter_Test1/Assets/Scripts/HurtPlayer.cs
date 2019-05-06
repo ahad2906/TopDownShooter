@@ -19,11 +19,17 @@ public class HurtPlayer : MonoBehaviour {
 
     void OnTriggerEnter(Collider col) {
 
-        if(enter && col.gameObject.tag == "Player") {
+		IDamageable damageable = col.gameObject.GetComponent<IDamageable> ();
+
+		if (damageable != null && col.gameObject.tag == "Player") {
+			damageable.Damage (damage);
+		}
+
+        /*if(enter && col.gameObject.tag == "Player") {
             col.gameObject.GetComponent<PlayerHealthManager>().hurtPlayer(damage);
         }
 
-        /*if (col.gameObject.tag == "Player") {
+        if (col.gameObject.tag == "Player") {
             col.gameObject.GetComponent<PlayerHealthManager>().hurtPlayer(damage);
         }*/
     }

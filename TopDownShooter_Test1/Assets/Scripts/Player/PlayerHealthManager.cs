@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class PlayerHealthManager : MonoBehaviour {
+public class PlayerHealthManager : MonoBehaviour, IDamageable {
 
     public int startingHealth;
     public int currHealth;
@@ -46,12 +46,20 @@ public class PlayerHealthManager : MonoBehaviour {
 
     }
 
-    public void hurtPlayer(int damageAmount) {
+	public void Damage(int amount) {
+		isDamaged = true;
+		currHealth -= amount;
+
+		flashCounter = flashLength;
+		rend.material.SetColor("_Color", Color.white);
+	}
+
+    /*public void hurtPlayer(int damageAmount) {
         isDamaged = true;
         currHealth -= damageAmount;
 
         flashCounter = flashLength;
         rend.material.SetColor("_Color", Color.white);
-    }
+    }*/
 
 }

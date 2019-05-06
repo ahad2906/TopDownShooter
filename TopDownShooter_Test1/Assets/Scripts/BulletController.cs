@@ -9,6 +9,8 @@ public class BulletController : MonoBehaviour {
     public float lifeTime;
 
     public int damageToGive;
+
+	private bool hasCollided = false;
     
 
     // Start is called before the first frame update
@@ -34,11 +36,23 @@ public class BulletController : MonoBehaviour {
 
 
     void OnCollisionEnter(Collision col) {
-        if (col.gameObject.tag == "Enemy") {
+		if (!hasCollided) {
+			hasCollided = true;
+
+			IDamageable damageable = col.gameObject.GetComponent<IDamageable> ();
+
+			if (damageable != null) {
+				damageable.Damage (damageToGive);
+			}
+
+			Destroy (gameObject);
+		}
+
+        /*if (col.gameObject.tag == "Enemy") {
             col.gameObject.GetComponent<EnemyHealthManager>().hurtEnemy(damageToGive);
             Destroy(gameObject);
         } else if (col.gameObject.tag == "Obstacle") {
             Destroy(gameObject);
-        }
+        }*/
     }
 }

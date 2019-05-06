@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyHealthManager : MonoBehaviour {
+public class EnemyHealthManager : MonoBehaviour, IDamageable {
 
     public int health;
-    private int currHealth;
+    public int currHealth;
 
 
     // Start is called before the first frame update
@@ -15,12 +15,17 @@ public class EnemyHealthManager : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        if (currHealth <= 0) {
-            Destroy(gameObject);
-        }
+        
     }
 
-    public void hurtEnemy(int damage) {
+	public void Damage(int amount) {
+		currHealth -= amount;
+		if (currHealth <= 0) {
+			Destroy(gameObject);
+		}
+	}
+
+    /*public void hurtEnemy(int damage) {
         currHealth -= damage;
-    }
+    }*/
 }

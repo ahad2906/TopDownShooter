@@ -155,7 +155,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 44057680}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 11.57}
+  m_LocalPosition: {x: 9.59, y: 0, z: 9.69}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -464,13 +464,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 534669902}
-  m_LocalRotation: {x: 0.60876137, y: 0, z: 0, w: 0.7933534}
-  m_LocalPosition: {x: -0.06, y: 10.71, z: -3.42}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 15, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 75, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!114 &534669906
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -484,8 +484,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 259687305}
-  smoothSpeed: 20
-  offset: {x: 0, y: 10, z: -3.4}
+  smoothSpeed: 3
+  offset: {x: 0, y: 15, z: 0}
 --- !u!1 &535765255
 GameObject:
   m_ObjectHideFlags: 0
@@ -884,7 +884,7 @@ PrefabInstance:
     - target: {fileID: 2656632213481719470, guid: 3e225414b81d1f340be95879b6886290,
         type: 3}
       propertyPath: timeBetweenShot
-      value: 0.02
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 4503099397891411382, guid: 3e225414b81d1f340be95879b6886290,
         type: 3}
@@ -1274,7 +1274,7 @@ MonoBehaviour:
   isFiring: 0
   bullet: {fileID: 4854044157957677242, guid: fa4202c8c6fdcf84c9c82dec386e2367, type: 3}
   bulletSpeed: 10
-  timeBetweenShot: 0.02
+  timeBetweenShot: 0.2
   firePoint: {fileID: 1038119869}
 --- !u!23 &3176604794622214930
 MeshRenderer:
