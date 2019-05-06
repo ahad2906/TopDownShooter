@@ -23,6 +23,7 @@ public class Spawner: MonoBehaviour {
             nextSpawnTime = Time.time + currentWave.spawnInterval;
 
             EnemyController spawnedEnemy = Instantiate(enemy, Vector3.zero, Quaternion.identity) as EnemyController;
+
         }
     }
 
