@@ -16,6 +16,9 @@ public class PlayerController : MonoBehaviour{
 
     public bool useController;
 
+    // flag til at tjekke om der skal tages brugerinput til playeren, når han er død
+    public bool movementEnabled = true;
+
 
     // Start is called before the first frame update
     void Start() {
