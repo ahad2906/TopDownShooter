@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour{
-    public float moveSpeed;
+
     private Rigidbody myRigidbody;
+    public float moveSpeed;
 
     private Vector3 moveInput;
     private Vector3 moveVelocity;
@@ -43,7 +44,7 @@ public class PlayerController : MonoBehaviour{
                 transform.LookAt(new Vector3(pointToLook.x, transform.position.y, pointToLook.z));
             }
 
-            //Weapon input "Mouse"
+            // Weapon input "Mouse"
             if (Input.GetMouseButtonDown(0))
                 theGun.isFiring = true;
 
@@ -58,7 +59,7 @@ public class PlayerController : MonoBehaviour{
                 transform.rotation = Quaternion.LookRotation(playerDirection, Vector3.up);
             }
 
-            //Weapon input "Controller"
+            //´Weapon input "Controller"
             if (Input.GetKeyDown(KeyCode.Joystick1Button5)) {
                 theGun.isFiring = true;
             }

@@ -6,6 +6,9 @@ public class HurtPlayer : MonoBehaviour {
 
     public int damage;
 
+    public bool enter = true;
+
+
     void Start() {
      
     }
@@ -15,8 +18,13 @@ public class HurtPlayer : MonoBehaviour {
     }
 
     void OnTriggerEnter(Collider col) {
-        if (col.gameObject.tag == "Player") {
+
+        if(enter) {
             col.gameObject.GetComponent<PlayerHealthManager>().hurtPlayer(damage);
         }
+
+        /*if (col.gameObject.tag == "Player") {
+            col.gameObject.GetComponent<PlayerHealthManager>().hurtPlayer(damage);
+        }*/
     }
 }
