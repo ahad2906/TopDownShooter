@@ -5,8 +5,12 @@ public class PlayerHealthManager : MonoBehaviour {
     public int startingHealth;
     public int currHealth;
 
-    public float flashSpeed = 5f;
-    public Color flashColour = new Color(1f, 0f, 0f, 0.1f);
+    public float flashLength;
+    private float flashCounter;
+
+    // variabel til at gemme objektets nuværende farve
+    private Renderer rend;
+    private Color storedColor;
 
     bool isDamaged = true;
     bool isDead = true;
@@ -14,21 +18,27 @@ public class PlayerHealthManager : MonoBehaviour {
     // Start is called before the first frame update
     void Start() {
         currHealth = startingHealth;
+        rend = GetComponent<Renderer>();
+        storedColor = rend.material.GetColor("_Color");
+
     }
 
     // Update is called once per frame
     void Update() {
-
-        // to-do: farve indikering når player tager damage
-        if(isDamaged) {
-           
-        }
 
         if (currHealth <=  0) {
             gameObject.SetActive(false);
             isDead = true;
             onDeath();
         }
+
+        if(flashCounter > 0) {
+            flashCounter -= Time.deltaTime;
+            if(flashCounter <= 0) {
+                rend.material.SetColor("_Color", storedColor);
+            }
+        }
+
     }
 
     // Hvad der sker når spilleren er død
@@ -39,6 +49,9 @@ public class PlayerHealthManager : MonoBehaviour {
     public void hurtPlayer(int damageAmount) {
         isDamaged = true;
         currHealth -= damageAmount;
+
+        flashCounter = flashLength;
+        rend.material.SetColor("_Color", Color.white);
     }
 
 }

@@ -19,7 +19,7 @@ public class HurtPlayer : MonoBehaviour {
 
     void OnTriggerEnter(Collider col) {
 
-        if(enter) {
+        if(enter && col.gameObject.tag == "Player") {
             col.gameObject.GetComponent<PlayerHealthManager>().hurtPlayer(damage);
         }
 
