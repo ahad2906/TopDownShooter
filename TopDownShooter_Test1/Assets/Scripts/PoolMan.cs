@@ -5,11 +5,27 @@ using UnityEngine;
 /**
  * Mr. poolman ready for duty
  **/
-public class PoolMan : MonoBehaviour
+public class PoolMan
 {
     Dictionary<int, Queue<PoolObject>> poolLib = new Dictionary<int, Queue<PoolObject>>();
-
+    private Transform transform;
     static PoolMan _instance;
+    public static PoolMan Instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                _instance = new PoolMan();
+            }
+            return _instance;
+        }
+    }
+
+    private PoolMan()
+    {
+        transform = GameObject.Instantiate(new GameObject("PoolManager")).transform;
+    }
     
     public void CreatePool(GameObject prefab, int size)
     {
@@ -26,7 +42,7 @@ public class PoolMan : MonoBehaviour
             for(int i = 0; i < size; i++)
             {
                 //Her instantieres vore prefab som GameObject og bruges som parameter til at instantiere et PoolObject
-                PoolObject obj = new PoolObject(Instantiate(prefab));
+                PoolObject obj = new PoolObject(GameObject.Instantiate(prefab));
                 //Dernæst settes vores pool GameObject som parent til dette
                 obj.SetParent(pool.transform);
                 //Og til sidst tilføjer vi det til dets tilhørende kø
@@ -36,7 +52,7 @@ public class PoolMan : MonoBehaviour
         }
     }
 
-    public void ReuseObject(GameObject prefab, Vector3 pos, Quaternion rot)
+    public PoolObject ReuseObject(GameObject prefab, Vector3 pos, Quaternion rot)
     {
         int key = prefab.GetInstanceID();
 
@@ -47,12 +63,20 @@ public class PoolMan : MonoBehaviour
             poolLib[key].Enqueue(obj);
 
             obj.Reuse(pos, rot);
+
+            return obj;
         }
+
+        return null;
     }
 
     public class PoolObject
     {
         private GameObject gameObject;
+        public GameObject GameObject
+        {
+            get { return gameObject; }
+        }
         private Transform transform;
         private bool hasInteface;
         private IPoolable _interface;
