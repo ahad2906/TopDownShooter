@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HurtPlayer : MonoBehaviour {
+public class MelleeAttack: MonoBehaviour {
 
     public int damage;
 

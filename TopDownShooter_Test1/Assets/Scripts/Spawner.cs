@@ -10,7 +10,7 @@ public class Spawner: MonoBehaviour {
     Wave currentWave;
     int currentWaveNumber;
 
-    int enemieRemainingToSpawn;
+    int enemiesRemainingToSpawn;
     float nextSpawnTime;
 
     private void Start() {
@@ -18,8 +18,8 @@ public class Spawner: MonoBehaviour {
     }
 
     void Update() {
-        if (enemieRemainingToSpawn > 0 && Time.time > nextSpawnTime) {
-            enemieRemainingToSpawn--;
+        if (enemiesRemainingToSpawn > 0 && Time.time > nextSpawnTime) {
+            enemiesRemainingToSpawn--;
             nextSpawnTime = Time.time + currentWave.spawnInterval;
 
 			EnemyController spawnedEnemy = Instantiate(enemy, transform.position, Quaternion.identity) as EnemyController;
@@ -30,7 +30,7 @@ public class Spawner: MonoBehaviour {
         currentWaveNumber++;
         currentWave = waves[currentWaveNumber - 1];
 
-        enemieRemainingToSpawn = currentWave.enemyCount;
+        enemiesRemainingToSpawn = currentWave.enemyCount;
     }
 
 

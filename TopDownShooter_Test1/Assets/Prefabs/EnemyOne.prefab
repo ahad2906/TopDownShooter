@@ -346,10 +346,9 @@ GameObject:
   - component: {fileID: 8726225178367402393}
   - component: {fileID: 8726225178367402396}
   - component: {fileID: 8726225178367402397}
-  - component: {fileID: 8726225178367402399}
   - component: {fileID: 8726225178367402398}
   m_Layer: 0
-  m_Name: Enemy
+  m_Name: EnemyOne
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -464,20 +463,6 @@ MonoBehaviour:
   flashLength: 0.2
   moveSpeed: 5
   thePlayer: {fileID: 0}
---- !u!114 &8726225178367402399
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8726225178367402390}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d2cb9716df61e44da44c0343d1c4be1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 5
-  currHealth: 0
 --- !u!195 &8726225178367402398
 NavMeshAgent:
   m_ObjectHideFlags: 0
