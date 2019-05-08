@@ -32,6 +32,9 @@ public class Room : MonoBehaviour
 
     public void UnlockDoors()
     {
-
+		foreach (Door door in doors)
+		{
+			door.state = Door.State.Unlocked;
+		}
     }
 }
