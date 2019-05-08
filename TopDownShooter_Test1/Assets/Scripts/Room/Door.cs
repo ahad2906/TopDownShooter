@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class Door : MonoBehaviour
 {
+	public enum State
+	{
+		Locked,
+		Unlocked
+	}
+	public State state;
+
     public enum Side
     {
         Top,
