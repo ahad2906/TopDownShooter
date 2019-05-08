@@ -11,10 +11,11 @@ public class Spawner: MonoBehaviour {
     int currentWaveNumber;
 
     int enemiesRemainingToSpawn;
+    int enemiesRemainingAlive;
     float nextSpawnTime;
 
     private void Start() {
-        nextWave();
+        NextWave();
     }
 
     void Update() {
@@ -28,14 +29,21 @@ public class Spawner: MonoBehaviour {
     }
 
     void OnEnemyDeath() {
-        print("Enemy died");
+        enemiesRemainingAlive -= 1;
+
+        if(enemiesRemainingAlive == 0) {
+            NextWave();
+        }
     }
 
-    void nextWave() {
+    void NextWave() {
         currentWaveNumber++;
-        currentWave = waves[currentWaveNumber - 1];
+        if (currentWaveNumber - 1 < waves.Length) {
+            currentWave = waves[currentWaveNumber - 1];
 
-        enemiesRemainingToSpawn = currentWave.enemyCount;
+            enemiesRemainingToSpawn = currentWave.enemyCount;
+            enemiesRemainingAlive = enemiesRemainingToSpawn;
+        }
     }
 
 
