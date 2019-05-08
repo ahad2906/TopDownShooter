@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 
 [RequireComponent (typeof (NavMeshAgent))]
-public class EnemyController : MonoBehaviour {
+public class EnemyController : LivingEntity {
 
     private Rigidbody myRB;
     public float moveSpeed;
@@ -17,28 +17,23 @@ public class EnemyController : MonoBehaviour {
     
     // Start is called before the first frame update
     void Start() {
+        base.Start();
         pathFinder = GetComponent<NavMeshAgent>();
         target = GameObject.FindGameObjectWithTag("Player").transform;
 
         StartCoroutine(UpdatePath());
- 
-       // myRB = GetComponent<Rigidbody>();
-        //thePlayer = FindObjectOfType<PlayerController>();
     }
 
     void FixedUpdate() {
-        //myRB.velocity = (transform.forward * moveSpeed);
+        
     }
 
     // Update is called once per frame
     void Update() {
-        
-        // Dyrt at kalde dette for hvert frame
-        //pathFinder.SetDestination(target.position);
-
-        //transform.LookAt(thePlayer.transform.position);
+        base.Update();
     }
 
+    //
     IEnumerator UpdatePath() {
         float refreshRate = .25f;
 

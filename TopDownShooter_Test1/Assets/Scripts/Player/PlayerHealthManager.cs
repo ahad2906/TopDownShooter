@@ -20,7 +20,6 @@ public class PlayerHealthManager : MonoBehaviour, IDamageable {
         currHealth = startingHealth;
         rend = GetComponent<Renderer>();
         storedColor = rend.material.GetColor("_Color");
-
     }
 
     // Update is called once per frame
@@ -29,7 +28,6 @@ public class PlayerHealthManager : MonoBehaviour, IDamageable {
         if (currHealth <=  0) {
             gameObject.SetActive(false);
             isDead = true;
-            onDeath();
         }
 
         if(flashCounter > 0) {
@@ -41,11 +39,6 @@ public class PlayerHealthManager : MonoBehaviour, IDamageable {
 
     }
 
-    // Hvad der sker når spilleren er død
-    void onDeath() {
-
-    }
-
 	public void Damage(int amount) {
 		isDamaged = true;
 		currHealth -= amount;
@@ -53,13 +46,5 @@ public class PlayerHealthManager : MonoBehaviour, IDamageable {
 		flashCounter = flashLength;
 		rend.material.SetColor("_Color", Color.white);
 	}
-
-    /*public void hurtPlayer(int damageAmount) {
-        isDamaged = true;
-        currHealth -= damageAmount;
-
-        flashCounter = flashLength;
-        rend.material.SetColor("_Color", Color.white);
-    }*/
 
 }

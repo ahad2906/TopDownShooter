@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour{
+public class PlayerController : LivingEntity {
 
     private Rigidbody myRigidbody;
     public float moveSpeed;
@@ -22,12 +22,15 @@ public class PlayerController : MonoBehaviour{
 
     // Start is called before the first frame update
     void Start() {
+        base.Start();
         myRigidbody = GetComponent<Rigidbody>();
         mainCamera = FindObjectOfType<Camera>(); 
     }
 
     // Update is called once per frame
     void Update() {
+        // ligesom en super i java, kalder metode fra super klasse
+        base.Update();
         // bruger .GetAxisRaw = fjerner smoothing, bevægelse stopper når man ikke giver input mere
         moveInput = new Vector3(Input.GetAxisRaw("Horizontal"), 0f, Input.GetAxisRaw("Vertical"));
         moveVelocity = moveInput * moveSpeed;
