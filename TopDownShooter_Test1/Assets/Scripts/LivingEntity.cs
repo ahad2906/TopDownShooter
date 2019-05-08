@@ -17,6 +17,7 @@ public abstract class LivingEntity : MonoBehaviour, IDamageable {
     private Renderer rend;
     private Color storedColor;
 
+    public event System.Action OnDeath;
 
     protected virtual void Start() {
         health = startingHealth;
@@ -53,6 +54,9 @@ public abstract class LivingEntity : MonoBehaviour, IDamageable {
 
     public void Die() {
         isDead = true;
+        if (OnDeath != null) {
+            OnDeath();
+        }
         gameObject.SetActive(false);
     }
 

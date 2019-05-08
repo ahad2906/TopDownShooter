@@ -23,7 +23,12 @@ public class Spawner: MonoBehaviour {
             nextSpawnTime = Time.time + currentWave.spawnInterval;
 
 			EnemyController spawnedEnemy = Instantiate(enemy, transform.position, Quaternion.identity) as EnemyController;
+            spawnedEnemy.OnDeath += OnEnemyDeath;
         }
+    }
+
+    void OnEnemyDeath() {
+        print("Enemy died");
     }
 
     void nextWave() {
