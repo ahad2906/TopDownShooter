@@ -17,16 +17,21 @@ public class EnemyController : LivingEntity {
     public enum State {Peace, Chasing, Attacking};
     State currentState; 
 
-    float attackDistance = 1.5f;
+    float attackDistance = .5f;
     float timeBetweenAttacks = 1;
 
     float nextAttackTime;
+    float enemyCollisionRadius;
+    float targetColliionRadius;
 
     // Start is called before the first frame update
     protected virtual void Start() {
         base.Start();
         pathFinder = GetComponent<NavMeshAgent>();
         target = GameObject.FindGameObjectWithTag("Player").transform;
+
+        enemyCollisionRadius = GetComponent<CapsuleCollider>().radius;
+        targetColliionRadius = target.GetComponent<CapsuleCollider>().radius;
 
         StartCoroutine(UpdatePath());
     }
@@ -41,8 +46,9 @@ public class EnemyController : LivingEntity {
 
         float distanceFromTarget = (target.position - transform.position).sqrMagnitude;
 
-        if(distanceFromTarget < Mathf.Pow (attackDistance, 2)) {
+        if(distanceFromTarget < Mathf.Pow (attackDistance + enemyCollisionRadius + targetColliionRadius, 2)) {
             nextAttackTime = Time.time + timeBetweenAttacks;
+            StartCoroutine(Attack());
 
         }
     }
@@ -53,7 +59,8 @@ public class EnemyController : LivingEntity {
         pathFinder.enabled = false;
 
         Vector3 attackStartPosition = transform.position;
-        Vector3 attackEndPosition = target.position;
+        Vector3 directionToTarget = (target.position - transform.position).normalized;
+        Vector3 attackEndPosition = target.position - directionToTarget * (enemyCollisionRadius);
 
         int attackSpeed = 3;
         float attatckStartEndDistance = 0;
@@ -76,7 +83,8 @@ public class EnemyController : LivingEntity {
 
         while (target != null) {
             if (currentState == State.Chasing) {
-                Vector3 targetPosition = new Vector3(target.position.x, 0, target.position.z);
+                Vector3 directionToTarget = (target.position - transform.position).normalized;
+                Vector3 targetPosition = target.position - directionToTarget * (enemyCollisionRadius + targetColliionRadius + attackDistance/2);
                 pathFinder.SetDestination(targetPosition);
                 yield return new WaitForSeconds(refreshRate);
             }
