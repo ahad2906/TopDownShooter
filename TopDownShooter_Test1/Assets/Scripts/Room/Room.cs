@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Room : MonoBehaviour
+public class Room : MonoBehaviour, IPoolable
 {
     public enum Size
     {
@@ -30,11 +30,50 @@ public class Room : MonoBehaviour
         
     }
 
-    public void UnlockDoors()
+    public void Initialize(int nbofdoors){
+
+    }
+
+    public void UnLockDoor(Door.Side side){
+        foreach (Door door in doors){
+            if (door.side == side){
+                door.state = Door.State.Unlocked;
+            }
+        }
+    }
+
+    private void LockDoors()
     {
 		foreach (Door door in doors)
 		{
-			door.state = Door.State.Unlocked;
+			door.state = Door.State.Locked;
 		}
+    }
+
+    public void OnObjectReuse()
+    {
+        
+    }
+
+    public void Destroy()
+    {
+        gameObject.SetActive(false);
+    }
+
+    public void OnCreate()
+    {
+        DungeonMaster dungeonMaster = FindObjectOfType<DungeonMaster>();
+
+        if (dungeonMaster != null){
+            foreach (Door door in doors){
+                door.OnEnterDoor += dungeonMaster.OnEnterDoor;
+                door.state = Door.State.Locked;
+            }
+        }
+    }
+
+    public void OnReuse()
+    {
+        LockDoors();
     }
 }

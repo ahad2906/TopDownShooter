@@ -9,7 +9,14 @@ public class Door : MonoBehaviour
 		Locked,
 		Unlocked
 	}
-	public State state;
+	private State _state;
+    public State state {
+        get { return _state;}
+        set {
+            _state = value;
+            UpdateColor();
+        }
+    }
 
     public enum Side
     {
@@ -31,5 +38,10 @@ public class Door : MonoBehaviour
     void Update()
     {
         
+    }
+
+    private void UpdateColor(){
+        GetComponent<Renderer>().material
+        .SetColor("_Color", (_state == State.Unlocked)? Color.blue : Color.red);
     }
 }

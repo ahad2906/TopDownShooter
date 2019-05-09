@@ -89,10 +89,14 @@ public class PoolMan
         {
             this.gameObject = gameObject;
             transform = gameObject.transform;
-            gameObject.SetActive(false);
 
             _interface = gameObject.GetComponent<IPoolable>();
-            hasInteface = (_interface != null);
+            if (_interface != null){
+                hasInteface = true;
+                _interface.OnCreate();
+            }
+
+            gameObject.SetActive(false);
         }
 
         public void Reuse(Vector3 pos, Quaternion rot)
@@ -101,7 +105,7 @@ public class PoolMan
             transform.position = pos;
             transform.rotation = rot;
 
-            if (hasInteface) _interface.OnObjectReuse();
+            if (hasInteface) _interface.OnReuse();
         }
 
         public void SetParent(Transform parent)

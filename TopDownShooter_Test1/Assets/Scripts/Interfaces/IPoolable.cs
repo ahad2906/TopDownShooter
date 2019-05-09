@@ -4,7 +4,8 @@ using UnityEngine;
 
 public interface IPoolable
 {
-    void OnObjectReuse();
+    void OnCreate();
+    void OnReuse();
 
     void Destroy();
 }
