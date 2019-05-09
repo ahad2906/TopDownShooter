@@ -6,18 +6,13 @@ using UnityEngine.AI;
 [RequireComponent (typeof (NavMeshAgent))]
 public class EnemyController : LivingEntity {
 
-    private Rigidbody myRB;
-    public float moveSpeed;
-
-    public PlayerController thePlayer;
+    public enum State { Peace, Chasing, Attacking };
+    State currentState;
 
     NavMeshAgent pathFinder;
     Transform target;
 
-    public enum State {Peace, Chasing, Attacking};
-    State currentState; 
-
-    float attackDistance = .5f;
+    float attackDistance =1.0f;
     float timeBetweenAttacks = 1;
 
     float nextAttackTime;
@@ -25,9 +20,10 @@ public class EnemyController : LivingEntity {
     float targetColliionRadius;
 
     // Start is called before the first frame update
-    protected virtual void Start() {
+    protected override void Start() {
         base.Start();
         pathFinder = GetComponent<NavMeshAgent>();
+        currentState = State.Chasing;
         target = GameObject.FindGameObjectWithTag("Player").transform;
 
         enemyCollisionRadius = GetComponent<CapsuleCollider>().radius;
@@ -36,21 +32,25 @@ public class EnemyController : LivingEntity {
         StartCoroutine(UpdatePath());
     }
 
-    void FixedUpdate() {
+    void FixedUpdate() {    
         
     }
 
     // Update is called once per frame
-    public void Update() {
+    void Update() {
         base.Update();
+        if (Time.time > nextAttackTime) {
+            float distanceFromTarget = (target.position - transform.position).sqrMagnitude;
+            if (distanceFromTarget < Mathf.Pow(attackDistance + enemyCollisionRadius + targetColliionRadius, 2)) {
+                nextAttackTime = Time.time + timeBetweenAttacks;
+                StartCoroutine(Attack());
 
-        float distanceFromTarget = (target.position - transform.position).sqrMagnitude;
-
-        if(distanceFromTarget < Mathf.Pow (attackDistance + enemyCollisionRadius + targetColliionRadius, 2)) {
-            nextAttackTime = Time.time + timeBetweenAttacks;
-            StartCoroutine(Attack());
-
+            }
         }
+    }
+
+    void onTargetDeath() {
+        currentState = State.Peace;
     }
 
     IEnumerator Attack() {
@@ -62,13 +62,13 @@ public class EnemyController : LivingEntity {
         Vector3 directionToTarget = (target.position - transform.position).normalized;
         Vector3 attackEndPosition = target.position - directionToTarget * (enemyCollisionRadius);
 
-        int attackSpeed = 3;
-        float attatckStartEndDistance = 0;
+        float attackSpeed = 3;
+        float percent = 0;
 
-        while(attatckStartEndDistance <= 1) {
+        while(percent <= 1) {
 
-            attatckStartEndDistance += Time.deltaTime + attackSpeed;
-            float interpolation = 4 * (-Mathf.Pow(attatckStartEndDistance, 2) + attatckStartEndDistance);
+            percent += Time.deltaTime + attackSpeed;
+            float interpolation = (-Mathf.Pow(percent, 2) + percent) * 4;
             transform.position = Vector3.Lerp(attackStartPosition, attackEndPosition, interpolation);
 
             yield return null;
@@ -79,15 +79,17 @@ public class EnemyController : LivingEntity {
  
     //
     IEnumerator UpdatePath() {
-        float refreshRate = .25f;
+        float refreshRate = .5f;
 
         while (target != null) {
             if (currentState == State.Chasing) {
                 Vector3 directionToTarget = (target.position - transform.position).normalized;
                 Vector3 targetPosition = target.position - directionToTarget * (enemyCollisionRadius + targetColliionRadius + attackDistance/2);
-                pathFinder.SetDestination(targetPosition);
-                yield return new WaitForSeconds(refreshRate);
+                if(!isDead) {
+                    pathFinder.SetDestination(targetPosition);
+                }
             }
+            yield return new WaitForSeconds(refreshRate);
         }
     }
 
