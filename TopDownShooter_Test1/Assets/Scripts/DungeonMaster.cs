@@ -40,7 +40,6 @@ public class DungeonMaster : MonoBehaviour
     public void OnEnterDoor(Door.Side side){
         if (minNbOfRooms > roomCount){
             roomCount++;
-            GameObject[] enemies = ChooseEnemies();
 
             if (curRoom != null){
                 curRoom.Destroy();
@@ -49,6 +48,11 @@ public class DungeonMaster : MonoBehaviour
                 .GameObject.GetComponent<Room>();
             player.GetComponent<Rigidbody>().position = curRoom.getPlayerSpawn(side);
             curRoom.UnLockDoor(side);
+
+            for(int i = 0; i < curRoom.spawnPoints.Length; i++)
+            {
+                poolMan.ReuseObject(enemies[0], curRoom.spawnPoints[i].position, Quaternion.identity);
+            }
         }
         
     }
@@ -66,7 +70,27 @@ public class DungeonMaster : MonoBehaviour
     }
 
     private GameObject[] ChooseEnemies(){
-        return null;
+        //TODO: fix it, write proper algorithm that chooses enemy types based on progression
+        List<GameObject> enemyPool = new List<GameObject>(enemies);
+        List<GameObject> pickedEnemies = new List<GameObject>();
+        int max = (int)Random.value * 10 + 1;
+        for (int i = 0; i < max; i++)
+        {
+            if (enemyPool.Count <= 0)
+                break;
+
+            foreach(GameObject enemy in enemies)
+            {
+                if (Random.value > .5f || pickedEnemies.Count == 0)
+                {
+                    pickedEnemies.Add(enemy);
+                    enemyPool.Remove(enemy);
+                    break;
+                }
+            }
+        }
+        Debug.Log(pickedEnemies.Count);
+        return pickedEnemies.ToArray();
     }
 
     private Door.Side[] ChooseDoors(){

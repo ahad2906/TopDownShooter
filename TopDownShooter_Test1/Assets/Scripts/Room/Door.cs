@@ -6,6 +6,7 @@ public class Door : MonoBehaviour
 {
     private const float PLAYER_DIST = 1f;
     private readonly Color COL_LOCKED = Color.red, COL_UNLOCKED = Color.blue;
+    private BoxCollider trigger;
 	public enum State
 	{
 		Locked,
@@ -17,6 +18,7 @@ public class Door : MonoBehaviour
         set {
             _state = value;
             UpdateColor();
+            UpdateTrigger();
         }
     }
 
@@ -48,6 +50,21 @@ public class Door : MonoBehaviour
     private void UpdateColor(){
         GetComponent<Renderer>().material
         .SetColor("_Color", (_state == State.Unlocked)? COL_UNLOCKED : COL_LOCKED);
+    }
+    private void UpdateTrigger()
+    {
+        if (trigger == null)
+        {
+            foreach (BoxCollider col in GetComponents<BoxCollider>())
+            {
+                if (col.isTrigger)
+                {
+                    trigger = col;
+                    break;
+                }
+            }
+        }
+        trigger.enabled = _state == State.Unlocked;
     }
 
     /// <summary>

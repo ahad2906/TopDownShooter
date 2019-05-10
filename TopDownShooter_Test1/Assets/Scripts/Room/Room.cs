@@ -22,8 +22,6 @@ public class Room : MonoBehaviour, IPoolable
 
     public Transform[] spawnPoints;
     public Door[] doors;
-    private int enemyCount;
-    public event System.Action OnRoomCleared;
 
     void Start()
     {
