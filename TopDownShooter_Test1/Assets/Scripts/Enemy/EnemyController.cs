@@ -12,7 +12,7 @@ public class EnemyController : LivingEntity {
     NavMeshAgent pathFinder;
     Transform target;
 
-    float attackDistance =1.0f;
+    float attackDistance =2.0f;
     float timeBetweenAttacks = 1;
 
     float nextAttackTime;
