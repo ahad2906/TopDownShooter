@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Door : MonoBehaviour
 {
-    private const float PLAYER_DIST = 2f;
+    private const float PLAYER_DIST = 1f;
+    private readonly Color COL_LOCKED = Color.red, COL_UNLOCKED = Color.blue;
 	public enum State
 	{
 		Locked,
@@ -22,8 +23,8 @@ public class Door : MonoBehaviour
     public enum Side
     {
         Top,
-        Bottom,
         Left,
+        Bottom,
         Right
     }
     public Side side;
@@ -46,6 +47,19 @@ public class Door : MonoBehaviour
     }
     private void UpdateColor(){
         GetComponent<Renderer>().material
-        .SetColor("_Color", (_state == State.Unlocked)? Color.blue : Color.red);
+        .SetColor("_Color", (_state == State.Unlocked)? COL_UNLOCKED : COL_LOCKED);
+    }
+
+    /// <summary>
+    /// OnTriggerEnter is called when the Collider other enters the trigger.
+    /// </summary>
+    /// <param name="other">The other Collider involved in this collision.</param>
+    void OnTriggerEnter(Collider other)
+    {
+        if (OnEnterDoor != null && 
+        other.GetComponent<PlayerController>() != null)
+        {
+            OnEnterDoor(side);
+        }
     }
 }

@@ -13,6 +13,7 @@ public class Spawner: MonoBehaviour {
     int enemiesRemainingToSpawn;
     int enemiesRemainingAlive;
     float nextSpawnTime;
+    public event System.Action OnPoolEmpty;
 
     private void Start() {
         NextWave();

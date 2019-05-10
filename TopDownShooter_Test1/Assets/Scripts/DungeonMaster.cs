@@ -11,13 +11,17 @@ public class DungeonMaster : MonoBehaviour
     public GameObject[] enemies;
     private PlayerController player;
     private PoolMan poolMan;
-    private Room curRoom, prevRoom;
+    private Spawner spawner;
+    private Room curRoom;
+    private int minNbOfRooms = 10, roomCount = 0;
     // Start is called before the first frame update
     void Start()
     {
         player = FindObjectOfType<PlayerController>();
+        spawner = FindObjectOfType<Spawner>();
         poolMan = PoolMan.Instance;
-        FillThePool(rooms, 3);
+        FillThePool(rooms, 1);
+        FillThePool(enemies, 6);
         OnEnterDoor(Door.Side.Bottom);
     }
 
@@ -34,10 +38,19 @@ public class DungeonMaster : MonoBehaviour
     }
 
     public void OnEnterDoor(Door.Side side){
-        //prevRoom = curRoom;
-        EnemyController[] enemies = ChooseEnemies();
-        curRoom = poolMan.ReuseObject(ChooseRoom(), Vector3.zero, Quaternion.identity)
-        .GameObject.GetComponent<Room>();
+        if (minNbOfRooms > roomCount){
+            roomCount++;
+            GameObject[] enemies = ChooseEnemies();
+
+            if (curRoom != null){
+                curRoom.Destroy();
+            }
+            curRoom = poolMan.ReuseObject(ChooseRoom(), Vector3.zero, Quaternion.identity)
+                .GameObject.GetComponent<Room>();
+            player.GetComponent<Rigidbody>().position = curRoom.getPlayerSpawn(side);
+            curRoom.UnLockDoor(side);
+        }
+        
     }
 
     public void OnRoomCleared(){
@@ -52,7 +65,7 @@ public class DungeonMaster : MonoBehaviour
         return rooms[pick];
     }
 
-    private EnemyController[] ChooseEnemies(){
+    private GameObject[] ChooseEnemies(){
         return null;
     }
 

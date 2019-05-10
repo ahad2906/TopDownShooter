@@ -52,17 +52,18 @@ public class Room : MonoBehaviour, IPoolable
 
     public Vector3 getPlayerSpawn(Door.Side side){
         Vector3 v = Vector3.zero;
+        //Finder den modsate dør
+        System.Array values = System.Enum.GetValues(typeof(Door.Side));
+        int opposite = ((int)side + 2) % values.Length;
+        side = (Door.Side)values.GetValue(opposite);
+
         foreach (Door door in doors){
             if (door.side == side){
                 v = door.GetPlayerSpawn();
             }
         }
-        return v;
-    }
 
-    public void OnObjectReuse()
-    {
-        
+        return v;
     }
 
     public void Destroy()
