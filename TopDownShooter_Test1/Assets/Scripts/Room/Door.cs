@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Door : MonoBehaviour
 {
+    private const float PLAYER_DIST = 2f;
 	public enum State
 	{
 		Locked,
@@ -40,6 +41,9 @@ public class Door : MonoBehaviour
         
     }
 
+    public Vector3 GetPlayerSpawn(){
+        return transform.position + transform.forward * PLAYER_DIST;  
+    }
     private void UpdateColor(){
         GetComponent<Renderer>().material
         .SetColor("_Color", (_state == State.Unlocked)? Color.blue : Color.red);

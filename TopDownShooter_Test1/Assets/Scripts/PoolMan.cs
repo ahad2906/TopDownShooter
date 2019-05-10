@@ -24,7 +24,7 @@ public class PoolMan
 
     private PoolMan()
     {
-        transform = GameObject.Instantiate(new GameObject("PoolManager")).transform;
+        transform = new GameObject("PoolManager").transform;
     }
     
     public void CreatePool(GameObject prefab, int size)

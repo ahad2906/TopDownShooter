@@ -50,6 +50,16 @@ public class Room : MonoBehaviour, IPoolable
 		}
     }
 
+    public Vector3 getPlayerSpawn(Door.Side side){
+        Vector3 v = Vector3.zero;
+        foreach (Door door in doors){
+            if (door.side == side){
+                v = door.GetPlayerSpawn();
+            }
+        }
+        return v;
+    }
+
     public void OnObjectReuse()
     {
         
