@@ -17,6 +17,7 @@ public class DungeonMaster : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Random.InitState(System.DateTime.Now.Millisecond);
         player = FindObjectOfType<PlayerController>();
         spawner = FindObjectOfType<Spawner>();
         poolMan = PoolMan.Instance;
@@ -65,7 +66,7 @@ public class DungeonMaster : MonoBehaviour
     }
 
     private GameObject ChooseRoom(){
-        int pick = Random.Range(1, rooms.Length) - 1;
+        int pick = Random.Range(0, rooms.Length);
         return rooms[pick];
     }
 
