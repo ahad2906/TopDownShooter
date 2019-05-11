@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3101824029477158801}
   - component: {fileID: 796146205700615046}
   - component: {fileID: 8130290688985963762}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Core
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -89,7 +89,7 @@ GameObject:
   - component: {fileID: 7898860751961054138}
   - component: {fileID: 6201782358124337434}
   - component: {fileID: 2371651797024634642}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: EnemyOne
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -104,7 +104,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7999037031416703538}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.4870084, y: 1.1735, z: 0.42785186}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3101824029477158801}
@@ -130,8 +130,8 @@ NavMeshAgent:
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
-  m_Height: 2
-  m_BaseOffset: 0
+  m_Height: 1
+  m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!114 &6201782358124337434
@@ -148,6 +148,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startingHealth: 3
   flashLength: 0.2
+  rend: {fileID: 8279798112973004970}
   attackDistance: 2
   timeBetweenAttacks: 1
   damage: 1
@@ -176,7 +177,7 @@ GameObject:
   - component: {fileID: 8279798112970711626}
   - component: {fileID: 8279798112972038762}
   - component: {fileID: 8279798112973004970}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Shell
   m_TagString: Untagged
   m_Icon: {fileID: 0}

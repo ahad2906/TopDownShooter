@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
-[RequireComponent(typeof(GunController))]
 public class Player : LivingEntity
 {
     public float moveSpeed = 5;
 
     private Camera mainCamera;
-    private GunController gunController;
+    private Gun gun;
     private Rigidbody rigidBody;
     private Vector3 velocity;
 
@@ -19,7 +18,7 @@ public class Player : LivingEntity
 
         mainCamera = Camera.main;
         rigidBody = GetComponent<Rigidbody>();
-        gunController = GetComponent<GunController>();
+        gun = GetComponentInChildren<Gun>();
     }
     protected override void Start()
     {
@@ -62,7 +61,7 @@ public class Player : LivingEntity
         // Skydning
         if (Input.GetMouseButton(0) || Input.GetKey(KeyCode.Joystick1Button5))
         {
-            //gunController.Shoot();
+            gun.Shoot();
         }
 
     }

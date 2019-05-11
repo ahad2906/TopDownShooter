@@ -28,15 +28,17 @@ public class Enemy : LivingEntity
     protected override void Die()
     {
         base.Die();
+        StopAllCoroutines();
         Destroy();
     }
     public override void OnCreate()
     {
-        //Init();
+        base.OnCreate();
     }
 
     public override void OnReuse()
     {
+        base.OnReuse();
         Init();
     }
 

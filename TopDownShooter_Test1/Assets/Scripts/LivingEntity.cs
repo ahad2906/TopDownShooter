@@ -15,7 +15,7 @@ public abstract class LivingEntity : MonoBehaviour, IDamageable, IPoolable {
     private float flashCounter;
 
     // variabel til at gemme objektets nuværende farve
-    private Renderer rend;
+    public Renderer rend;
     private Color storedColor;
 
     public event System.Action OnDeath;
@@ -27,22 +27,21 @@ public abstract class LivingEntity : MonoBehaviour, IDamageable, IPoolable {
 
     // Update is called once per frame
     protected virtual void Update() {
-        /*if (flashCounter > 0) {
+        if (flashCounter > 0) {
             flashCounter -= Time.deltaTime;
             if (flashCounter <= 0)        {
                 rend.material.SetColor("_Color", storedColor);
             }
-        }*/
+        }
     }
 
     public virtual void Damage(int amount) {
         isDamaged = true;
         health -= amount;
         healthPercent = (float)health / startingHealth;
-        Debug.Log("Health at " + healthPercent + "%");
 
-        /*flashCounter = flashLength;
-        rend.material.SetColor("_Color", Color.white);*/
+        flashCounter = flashLength;
+        rend.material.SetColor("_Color", Color.white);
 
         if (OnDamage != null)
         {
@@ -71,8 +70,7 @@ public abstract class LivingEntity : MonoBehaviour, IDamageable, IPoolable {
     public virtual void OnCreate()
     {
         ResetHealth();
-        /*rend = GetComponent<Renderer>();
-        storedColor = rend.material.GetColor("_Color");*/
+        storedColor = rend.material.GetColor("_Color");
     }
 
     public virtual void OnReuse()
