@@ -13,7 +13,11 @@ public class DungeonMaster : MonoBehaviour
     private PoolMan poolMan;
     private Spawner spawner;
     private Room curRoom;
-    private int minNbOfRooms = 10, roomCount = 0;
+    private Wave[] waves;
+    private Wave currentWave;
+    private int waveNumber, enemiesRemainingToSpawn, enemiesRemainingAlive;
+    private float nextSpawnTime;
+    private int minNbOfRooms = 10, roomCount;
     // Start is called before the first frame update
     void Start()
     {
@@ -29,7 +33,10 @@ public class DungeonMaster : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (enemiesRemainingToSpawn > 0 && Time.time > nextSpawnTime)
+        {
+            SpawnWave();
+        }
     }
 
     private void FillThePool(GameObject[] prefabs, int size){
@@ -48,21 +55,13 @@ public class DungeonMaster : MonoBehaviour
             curRoom = poolMan.ReuseObject(ChooseRoom(), Vector3.zero, Quaternion.identity)
                 .GameObject.GetComponent<Room>();
             player.GetComponent<Rigidbody>().position = curRoom.getPlayerSpawn(side);
-            curRoom.UnLockDoor(side);
 
-            for(int i = 0; i < curRoom.spawnPoints.Length; i++)
-            {
-                poolMan.ReuseObject(enemies[0], curRoom.spawnPoints[i].position, Quaternion.identity);
-            }
+            GenerateWaves();
+            waveNumber = 0;
+            NextWave();
+            nextSpawnTime = Time.time + 1f;
         }
         
-    }
-
-    public void OnRoomCleared(){
-        //Låser de valgte døre op
-        foreach(Door.Side side in ChooseDoors()){
-            curRoom.UnLockDoor(side);
-        }
     }
 
     private GameObject ChooseRoom(){
@@ -71,30 +70,95 @@ public class DungeonMaster : MonoBehaviour
     }
 
     private GameObject[] ChooseEnemies(){
-        //TODO: fix it, write proper algorithm that chooses enemy types based on progression
-        List<GameObject> enemyPool = new List<GameObject>(enemies);
-        List<GameObject> pickedEnemies = new List<GameObject>();
-        int max = (int)Random.value * 10 + 1;
-        for (int i = 0; i < max; i++)
-        {
-            if (enemyPool.Count <= 0)
-                break;
-
-            foreach(GameObject enemy in enemies)
-            {
-                if (Random.value > .5f || pickedEnemies.Count == 0)
-                {
-                    pickedEnemies.Add(enemy);
-                    enemyPool.Remove(enemy);
-                    break;
-                }
-            }
-        }
-        Debug.Log(pickedEnemies.Count);
-        return pickedEnemies.ToArray();
+        //Ikke implementeret
+        return null;
     }
 
     private Door.Side[] ChooseDoors(){
-        return null;
+        Door.Side[] sides = new Door.Side[Random.Range(1, 4)];
+        List<Door> list = new List<Door>(curRoom.doors);
+        for (int i = 0; i < sides.Length; i++)
+        {
+            int j = Random.Range(0, list.Count);
+            sides[i] = list[j].side;
+            list.RemoveAt(j);
+        }
+        return sides;
+    }
+
+    public void OnEnemyDeath()
+    {
+        enemiesRemainingAlive -= 1;
+
+        if (enemiesRemainingAlive == 0)
+        {
+            NextWave();
+        }
+    }
+
+    public void OnRoomCleared()
+    {
+        //Låser de valgte døre op
+        foreach (Door.Side side in ChooseDoors())
+        {
+            curRoom.UnLockDoor(side);
+        }
+    }
+
+    private void GenerateWaves()
+    {
+        int maxSpawn = curRoom.spawnPoints.Length; //Gemmer hvor mange fjender som kan spawnes på samme tid
+        int nbOfEnemies = Random.Range(1, (int)(maxSpawn * Random.Range(1f, 3f))); //Vælger tilfældigt hvor stor puljen skal være
+        //Regner ud om der er et skævt antal fjender og retter derefter
+        int remainder = nbOfEnemies % maxSpawn;
+        int nbOfWaves = (nbOfEnemies - remainder) / maxSpawn;
+        if (remainder > 0)
+            nbOfWaves++;
+        else
+            remainder = maxSpawn;
+        //instantierer Wave array'et
+        waves = new Wave[nbOfWaves];
+        //Instantierer hvert enkelt Wave objekt
+        for (int i = 0; i < nbOfWaves; i++)
+        {
+            waves[i] = new Wave();
+            waves[i].enemyCount = (i < nbOfWaves - 1) ? maxSpawn : remainder;
+            waves[i].spawnInterval = 2f;
+        }
+    }
+
+    private void SpawnWave()
+    {
+        for (int i = 0; i < currentWave.enemyCount; i++)
+        {
+            poolMan.ReuseObject(enemies[0], curRoom.spawnPoints[i].position, Quaternion.identity);
+            enemiesRemainingToSpawn--;
+        }
+        Debug.Log("Remaining: " + enemiesRemainingToSpawn + " Wavenb: " + waveNumber + " Total: " + waves.Length);
+    }
+
+    private void NextWave()
+    {
+        if (waveNumber < waves.Length)
+        {
+            currentWave = waves[waveNumber];
+
+            enemiesRemainingToSpawn = currentWave.enemyCount;
+            enemiesRemainingAlive = enemiesRemainingToSpawn;
+            nextSpawnTime = Time.time + currentWave.spawnInterval;
+            waveNumber++;
+        }
+        else
+        {
+            //Rummet er cleared
+            OnRoomCleared();
+        }
+    }
+
+    public class Wave
+    {
+        public int enemyCount;
+        public float spawnInterval;
+
     }
 }

@@ -43,6 +43,9 @@ public class Enemy : LivingEntity
             collisionRadius = GetComponent<CapsuleCollider>().radius;
             targetCollisionRadius = target.GetComponent<CapsuleCollider>().radius;
         }
+
+        //Tilmelder vores DungeonMaster som listener
+        OnDeath += FindObjectOfType<DungeonMaster>().OnEnemyDeath;
     }
 
     public override void OnReuse()
