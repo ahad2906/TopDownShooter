@@ -29,33 +29,29 @@ public class Enemy : LivingEntity
     {
         base.Die();
         StopAllCoroutines();
-        Destroy();
     }
     public override void OnCreate()
     {
         base.OnCreate();
-    }
-
-    public override void OnReuse()
-    {
-        base.OnReuse();
-        Init();
-    }
-
-    protected virtual void Init()
-    {
         pathfinder = GetComponent<NavMeshAgent>();
         target = FindObjectOfType<Player>().transform;
         if (target != null)
         {
-            hasTarget = true;
-            currentState = State.Chasing;
-
             targetEntity = target.GetComponent<LivingEntity>();
             targetEntity.OnDeath += OnTargetDeath;
 
             collisionRadius = GetComponent<CapsuleCollider>().radius;
             targetCollisionRadius = target.GetComponent<CapsuleCollider>().radius;
+        }
+    }
+
+    public override void OnReuse()
+    {
+        base.OnReuse();
+        if (target != null)
+        {
+            hasTarget = true;
+            currentState = State.Chasing;
 
             StartCoroutine(UpdatePath());
         }
@@ -80,6 +76,7 @@ public class Enemy : LivingEntity
 
     private void OnTargetDeath()
     {
+        StopAllCoroutines();
         hasTarget = false;
         currentState = State.Idling;
     }

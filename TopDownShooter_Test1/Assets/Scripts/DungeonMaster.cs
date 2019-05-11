@@ -47,7 +47,7 @@ public class DungeonMaster : MonoBehaviour
             }
             curRoom = poolMan.ReuseObject(ChooseRoom(), Vector3.zero, Quaternion.identity)
                 .GameObject.GetComponent<Room>();
-            player.GetComponent<Rigidbody>().position = curRoom.getPlayerSpawn(side) + Vector3.up * 0.1f;
+            player.GetComponent<Rigidbody>().position = curRoom.getPlayerSpawn(side);
             curRoom.UnLockDoor(side);
 
             for(int i = 0; i < curRoom.spawnPoints.Length; i++)
