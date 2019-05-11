@@ -6,6 +6,7 @@ public abstract class LivingEntity : MonoBehaviour, IDamageable {
 
     public int startingHealth;
     protected int health;
+    protected float healthPercent;
 
     bool isDamaged;
     protected bool isDead;
@@ -26,23 +27,20 @@ public abstract class LivingEntity : MonoBehaviour, IDamageable {
     }
 
     // Update is called once per frame
-    public void Update() {
+    protected virtual void Update() {
         if (flashCounter > 0) {
             flashCounter -= Time.deltaTime;
             if (flashCounter <= 0)        {
                 rend.material.SetColor("_Color", storedColor);
             }
         }
-
-        if (health <= 0) {
-            gameObject.SetActive(false);
-            Die();
-        }
     }
 
-    public void Damage(int amount) {
+    public virtual void Damage(int amount) {
         isDamaged = true;
         health -= amount;
+        healthPercent = (float)health / startingHealth;
+        Debug.Log("Health at " + healthPercent + "%");
 
         flashCounter = flashLength;
         rend.material.SetColor("_Color", Color.white);
@@ -52,12 +50,11 @@ public abstract class LivingEntity : MonoBehaviour, IDamageable {
         }
     }
 
-    public void Die() {
+    protected virtual void Die() {
         isDead = true;
         if (OnDeath != null) {
             OnDeath();
         }
-        gameObject.SetActive(false);
     }
 
 }
