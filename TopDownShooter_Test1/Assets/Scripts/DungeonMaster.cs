@@ -9,7 +9,7 @@ public class DungeonMaster : MonoBehaviour
 {
     public GameObject[] rooms;
     public GameObject[] enemies;
-    private PlayerController player;
+    private Player player;
     private PoolMan poolMan;
     private Spawner spawner;
     private Room curRoom;
@@ -18,7 +18,7 @@ public class DungeonMaster : MonoBehaviour
     void Start()
     {
         Random.InitState(System.DateTime.Now.Millisecond);
-        player = FindObjectOfType<PlayerController>();
+        player = FindObjectOfType<Player>();
         spawner = FindObjectOfType<Spawner>();
         poolMan = PoolMan.Instance;
         FillThePool(rooms, 1);

@@ -74,7 +74,7 @@ public class Door : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         if (OnEnterDoor != null && 
-        other.GetComponent<PlayerController>() != null)
+        other.GetComponent<Player>() != null)
         {
             OnEnterDoor(side);
         }

@@ -9,7 +9,7 @@ public class PoolMan
 {
     Dictionary<int, Queue<PoolObject>> poolLib = new Dictionary<int, Queue<PoolObject>>();
     private Transform transform;
-    static PoolMan _instance;
+    private static PoolMan _instance;
     public static PoolMan Instance
     {
         get

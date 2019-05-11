@@ -32,7 +32,7 @@ public class Enemy : LivingEntity
     }
     public override void OnCreate()
     {
-        Init();
+        //Init();
     }
 
     public override void OnReuse()
@@ -43,13 +43,12 @@ public class Enemy : LivingEntity
     protected virtual void Init()
     {
         pathfinder = GetComponent<NavMeshAgent>();
-        target = FindObjectOfType<PlayerController>().transform;
+        target = FindObjectOfType<Player>().transform;
         if (target != null)
         {
             hasTarget = true;
             currentState = State.Chasing;
 
-            target = GameObject.FindGameObjectWithTag("Player").transform;
             targetEntity = target.GetComponent<LivingEntity>();
             targetEntity.OnDeath += OnTargetDeath;
 
