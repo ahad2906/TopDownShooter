@@ -69,7 +69,7 @@ public class Player : LivingEntity
     void FixedUpdate()
     {
         //Bevæger vores spiller
-        //rigidBody.MovePosition(rigidBody.position + velocity * Time.fixedDeltaTime);
-        rigidBody.velocity = velocity;
+        rigidBody.MovePosition(rigidBody.position + velocity * Time.fixedDeltaTime);
+        //rigidBody.velocity = velocity ;
     }
 }
