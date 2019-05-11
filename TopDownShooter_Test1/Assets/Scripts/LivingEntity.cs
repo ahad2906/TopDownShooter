@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class LivingEntity : MonoBehaviour, IDamageable {
+public abstract class LivingEntity : MonoBehaviour, IDamageable, IPoolable {
 
     public int startingHealth;
     protected int health;
@@ -19,11 +19,10 @@ public abstract class LivingEntity : MonoBehaviour, IDamageable {
     private Color storedColor;
 
     public event System.Action OnDeath;
+    public event System.Action<int> OnDamage;
 
     protected virtual void Start() {
-        health = startingHealth;
-        rend = GetComponent<Renderer>();
-        storedColor = rend.material.GetColor("_Color");
+        
     }
 
     // Update is called once per frame
@@ -50,13 +49,38 @@ public abstract class LivingEntity : MonoBehaviour, IDamageable {
         }
     }
 
+    private void ResetHealth()
+    {
+        health = startingHealth;
+        healthPercent = 1;
+    }
+
     protected virtual void Die() {
         isDead = true;
         if (OnDeath != null) {
             OnDeath();
         }
+        Destroy();
     }
 
+    public virtual void OnCreate()
+    {
+        ResetHealth();
+        rend = GetComponent<Renderer>();
+        storedColor = rend.material.GetColor("_Color");
+    }
+
+    public virtual void OnReuse()
+    {
+        ResetHealth();
+        isDead = false;
+        gameObject.SetActive(true);
+    }
+
+    public virtual void Destroy()
+    {
+        gameObject.SetActive(false);
+    }
 }
 
 

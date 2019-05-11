@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 
 [RequireComponent(typeof(NavMeshAgent))]
-public class Enemy : LivingEntity, IPoolable
+public class Enemy : LivingEntity
 {
     public enum State { Idling, Chasing, Attacking };
     private State currentState;
@@ -30,20 +30,13 @@ public class Enemy : LivingEntity, IPoolable
         base.Die();
         Destroy();
     }
-    public virtual void Destroy()
-    {
-        gameObject.SetActive(false);
-    }
-
-    public void OnCreate()
+    public override void OnCreate()
     {
         Init();
     }
 
-    public void OnReuse()
+    public override void OnReuse()
     {
-        health = startingHealth;
-        isDead = false;
         Init();
     }
 

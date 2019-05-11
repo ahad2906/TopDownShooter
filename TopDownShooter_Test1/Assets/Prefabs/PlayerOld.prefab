@@ -418,7 +418,7 @@ GameObject:
   - component: {fileID: 8070486117656663269}
   - component: {fileID: 8070486117656663275}
   m_Layer: 0
-  m_Name: Player
+  m_Name: PlayerOld
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -864,30 +864,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8070486117656663272}
     m_Modifications:
-    - target: {fileID: 144057764795725236, guid: 3e225414b81d1f340be95879b6886290,
+    - target: {fileID: 2656632213481719470, guid: 3e225414b81d1f340be95879b6886290,
         type: 3}
-      propertyPath: m_Name
-      value: Gun
+      propertyPath: bulletSpeed
+      value: 10
       objectReference: {fileID: 0}
-    - target: {fileID: 5965013644996022, guid: 3e225414b81d1f340be95879b6886290, type: 3}
-      propertyPath: muzzle
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5965013644996022, guid: 3e225414b81d1f340be95879b6886290, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5965013644996022, guid: 3e225414b81d1f340be95879b6886290, type: 3}
-      propertyPath: msBetweenShots
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5965013644996022, guid: 3e225414b81d1f340be95879b6886290, type: 3}
-      propertyPath: muzzleVelocity
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5965013644996022, guid: 3e225414b81d1f340be95879b6886290, type: 3}
-      propertyPath: nextShotTime
-      value: 100
+    - target: {fileID: 2656632213481719470, guid: 3e225414b81d1f340be95879b6886290,
+        type: 3}
+      propertyPath: timeBetweenShot
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 7041742139271294879, guid: 3e225414b81d1f340be95879b6886290,
         type: 3}
@@ -944,15 +929,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2656632213481719470, guid: 3e225414b81d1f340be95879b6886290,
+    - target: {fileID: 144057764795725236, guid: 3e225414b81d1f340be95879b6886290,
         type: 3}
-      propertyPath: bulletSpeed
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 2656632213481719470, guid: 3e225414b81d1f340be95879b6886290,
-        type: 3}
-      propertyPath: timeBetweenShot
-      value: 0.2
+      propertyPath: m_Name
+      value: Gun
       objectReference: {fileID: 0}
     - target: {fileID: 4503099397891411382, guid: 3e225414b81d1f340be95879b6886290,
         type: 3}
@@ -963,6 +943,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.z
       value: 0.146
+      objectReference: {fileID: 0}
+    - target: {fileID: 5965013644996022, guid: 3e225414b81d1f340be95879b6886290, type: 3}
+      propertyPath: muzzle
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5965013644996022, guid: 3e225414b81d1f340be95879b6886290, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5965013644996022, guid: 3e225414b81d1f340be95879b6886290, type: 3}
+      propertyPath: msBetweenShots
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5965013644996022, guid: 3e225414b81d1f340be95879b6886290, type: 3}
+      propertyPath: muzzleVelocity
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5965013644996022, guid: 3e225414b81d1f340be95879b6886290, type: 3}
+      propertyPath: nextShotTime
+      value: 100
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 0}
