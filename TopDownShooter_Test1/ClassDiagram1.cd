@@ -1,0 +1,148 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="CameraFollow" Collapsed="true">
+    <Position X="5.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAgAAAAAAIAAAAAAAAAAAAAAAAAIAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Camera\CameraFollow.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ControllerDetector" Collapsed="true">
+    <Position X="7" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAAAAAAAAAAAAAAAAAABAAAQAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Controls\ControllerDetector.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DungeonMaster" Collapsed="true">
+    <Position X="10.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAQBBYACACQQDAIAABIEKAAAAABCAABBQEBBgAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\DungeonMaster.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Enemy" Collapsed="true">
+    <Position X="2.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAEgAAkIwAAAAAAAaAGAgCAAACAAACAAAA=</HashCode>
+      <FileName>Assets\Scripts\Enemy\Enemy.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameUI" Collapsed="true">
+    <Position X="5.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAACAAACEAAAAAAAAAAAAAAAAAAAAAAAAAgAAIIAA=</HashCode>
+      <FileName>Assets\Scripts\GameUI.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LivingEntity" Collapsed="true">
+    <Position X="1.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAGAACAAAAAgASAAAIBAADBAAAAAAQBAGAAIEAg=</HashCode>
+      <FileName>Assets\Scripts\LivingEntity.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Player" Collapsed="true">
+    <Position X="0.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQIAABAEigAAAAAAAAAAAAAACAAEAAAAAQAAAQAAAA=</HashCode>
+      <FileName>Assets\Scripts\Player\Player.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PoolMan" Collapsed="true">
+    <Position X="8.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAAAAAAAAAAAAAAAAAEAIAAQAAAAAAQAAI=</HashCode>
+      <FileName>Assets\Scripts\PoolMan.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Door" Collapsed="true">
+    <Position X="8.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQQAAIAECSAAAAAAIAACAAAAEAAAIAEQAAAAAAAEAA=</HashCode>
+      <FileName>Assets\Scripts\Room\Door.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Room" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="5.25" Y="2.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Enum Name="Room.Size" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\Scripts\Room\Room.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+      <Enum Name="Room.Type" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\Scripts\Room\Room.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAGCAAQAAAQAAAAAAACBCABEAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Room\Room.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Spawner" Collapsed="true">
+    <Position X="7" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQBAYAAACAAAAAAAAAEIAAAAAAAAABQAABAAAAAAEI=</HashCode>
+      <FileName>Assets\Scripts\Spawner.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="UIArrow" Collapsed="true">
+    <Position X="8.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAAAAAAIAAAACAAAAAAAAABAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\UIArrow.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Gun" Collapsed="true">
+    <Position X="7" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAACIABAAAgAAAAAgAAAAAAAAAAAAgQAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Weapon\Gun\Gun.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Projectile" BaseTypeListCollapsed="true">
+    <Position X="10.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAEAAACAAwAAAAQAAAAAAQCJAAQCAAAAAAAAAAAQ=</HashCode>
+      <FileName>Assets\Scripts\Weapon\Gun\Projectile.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Interface Name="IDamageable" Collapsed="true">
+    <Position X="5.25" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Interfaces\IDamageable.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="IDamageDealer" Collapsed="true">
+    <Position X="7" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Interfaces\IDamageDealer.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="IPoolable" Collapsed="true">
+    <Position X="8.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAQAAAAAAACBAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Interfaces\IPoolable.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="DamageType">
+    <Position X="5.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAQAAAAAAAAAEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Interfaces\IDamageDealer.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
