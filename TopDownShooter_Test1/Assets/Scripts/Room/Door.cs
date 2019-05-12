@@ -5,7 +5,7 @@ using UnityEngine;
 public class Door : MonoBehaviour
 {
     private const float PLAYER_DIST = 1f;
-    private readonly Color COL_LOCKED = Color.red, COL_UNLOCKED = Color.blue;
+    private readonly Color COL_LOCKED = Color.red, COL_UNLOCKED = Color.cyan;
     private BoxCollider trigger;
 	public enum State
 	{
@@ -49,7 +49,7 @@ public class Door : MonoBehaviour
     }
     private void UpdateColor(){
         GetComponent<Renderer>().material
-        .SetColor("_Color", (_state == State.Unlocked)? COL_UNLOCKED : COL_LOCKED);
+        .SetColor("_EmissionColor", (_state == State.Unlocked) ? COL_UNLOCKED : COL_LOCKED);
     }
     private void UpdateTrigger()
     {

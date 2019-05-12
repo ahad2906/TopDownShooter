@@ -18,6 +18,8 @@ public class DungeonMaster : MonoBehaviour
     private int waveNumber, enemiesRemainingToSpawn, enemiesRemainingAlive;
     private float nextSpawnTime;
     private int minNbOfRooms = 10, roomCount;
+    public event System.Action<Transform[]> OnRoomCleared;
+    public event System.Action OnNewRoom;
     // Start is called before the first frame update
     void Start()
     {
@@ -46,6 +48,13 @@ public class DungeonMaster : MonoBehaviour
     }
 
     public void OnEnterDoor(Door.Side side){
+        //Kald vores listeners, hvis nogle
+        if (OnNewRoom != null)
+        {
+            OnNewRoom();
+        }
+        //Checker at vi ikke har passeret det min antal rum
+        //Ideen her er så at vælge et bossrum hvis det ikke er tilfældet
         if (minNbOfRooms > roomCount){
             roomCount++;
 
@@ -74,16 +83,14 @@ public class DungeonMaster : MonoBehaviour
         return null;
     }
 
-    private Door.Side[] ChooseDoors(){
-        Door.Side[] sides = new Door.Side[Random.Range(1, 4)];
+    private Door[] ChooseDoors(){
+        int doorsToRemove = Random.Range(1, 4);
         List<Door> list = new List<Door>(curRoom.doors);
-        for (int i = 0; i < sides.Length; i++)
+        for (int i = 0; i < doorsToRemove; i++)
         {
-            int j = Random.Range(0, list.Count);
-            sides[i] = list[j].side;
-            list.RemoveAt(j);
+            list.RemoveAt(Random.Range(0, list.Count));
         }
-        return sides;
+        return list.ToArray();
     }
 
     public void OnEnemyDeath()
@@ -96,13 +103,20 @@ public class DungeonMaster : MonoBehaviour
         }
     }
 
-    public void OnRoomCleared()
+    private void RoomCleared()
     {
-        //Låser de valgte døre op
-        foreach (Door.Side side in ChooseDoors())
+        List<Transform> transforms = new List<Transform>();
+
+        //Låser de valgte døre op og tilføjer deres transform til listen
+        foreach (Door door in ChooseDoors())
         {
-            curRoom.UnLockDoor(side);
+            curRoom.UnLockDoor(door);
+            transforms.Add(door.transform);
         }
+
+        //Kalder listeners hvis der findes nogle
+        if (OnRoomCleared != null)
+            OnRoomCleared(transforms.ToArray());
     }
 
     private void GenerateWaves()
@@ -151,7 +165,7 @@ public class DungeonMaster : MonoBehaviour
         else
         {
             //Rummet er cleared
-            OnRoomCleared();
+            RoomCleared();
         }
     }
 

@@ -32,9 +32,9 @@ public class Room : MonoBehaviour, IPoolable
 
     }
 
-    public void UnLockDoor(Door.Side side){
+    public void UnLockDoor(Door uDoor){
         foreach (Door door in doors){
-            if (door.side == side){
+            if (door.side == uDoor.side) {
                 door.state = Door.State.Unlocked;
             }
         }
