@@ -63,7 +63,6 @@ public abstract class LivingEntity : MonoBehaviour, IDamageable, IPoolable {
         isDead = true;
         if (OnDeath != null) {
             OnDeath();
-            Time.timeScale = 0;
         }
         Destroy();
     }
