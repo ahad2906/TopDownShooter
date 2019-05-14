@@ -10,9 +10,9 @@ public class TimeController : MonoBehaviour
     private bool paused = false;
 
 
-    private void Start()
+    void Start()
     {
-        Time.timeScale = 1;
+        Time.timeScale = 0;
 
         pauseObjects = GameObject.FindGameObjectsWithTag("ShowOnPause");
 
