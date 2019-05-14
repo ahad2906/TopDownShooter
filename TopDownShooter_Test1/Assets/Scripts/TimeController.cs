@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class TimeController : MonoBehaviour
 {
@@ -65,6 +66,11 @@ public class TimeController : MonoBehaviour
         {
             gameObject.SetActive(false);
         }
+    }
+
+    public void LoadLevel(string level)
+    {
+        SceneManager.LoadScene(level);
     }
 
 }
