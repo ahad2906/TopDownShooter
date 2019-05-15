@@ -11,7 +11,6 @@ public class DungeonMaster : MonoBehaviour
     public GameObject[] enemies;
     private Player player;
     private PoolMan poolMan;
-    private Spawner spawner;
     private Room curRoom;
     private Wave[] waves;
     private Wave currentWave;
@@ -25,7 +24,6 @@ public class DungeonMaster : MonoBehaviour
     {
         Random.InitState(System.DateTime.Now.Millisecond);
         player = FindObjectOfType<Player>();
-        spawner = FindObjectOfType<Spawner>();
         poolMan = PoolMan.Instance;
         FillThePool(rooms, 1);
         FillThePool(enemies, 6);
@@ -61,12 +59,16 @@ public class DungeonMaster : MonoBehaviour
             if (curRoom != null){
                 curRoom.Destroy();
             }
+            //Vælger et tilfældigt rum og tager det ud af puljen
             curRoom = poolMan.ReuseObject(ChooseRoom(), Vector3.zero, Quaternion.identity)
                 .GameObject.GetComponent<Room>();
+            //Placer spilleren forand modsatte dør han gik ud af
             player.GetComponent<Rigidbody>().position = curRoom.getPlayerSpawn(side);
 
+            //Genrerer de "bølger" og antallet af fjender som der kommer i rummet
             GenerateWaves();
             waveNumber = 0;
+            //Starter den næste "bølge" af fjender
             NextWave();
             nextSpawnTime = Time.time + 1f;
         }

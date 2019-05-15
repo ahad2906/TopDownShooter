@@ -7,7 +7,7 @@ using UnityEngine;
  **/
 public class PoolMan
 {
-    Dictionary<int, Queue<PoolObject>> poolLib = new Dictionary<int, Queue<PoolObject>>();
+    private Dictionary<int, Queue<PoolObject>> poolLib = new Dictionary<int, Queue<PoolObject>>();
     private Transform transform;
     private static PoolMan _instance;
     public static PoolMan Instance

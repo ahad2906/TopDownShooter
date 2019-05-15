@@ -6,10 +6,10 @@ public class Gun : MonoBehaviour
 {
     public Transform muzzle;
     public Projectile projectile;
-    public float fireRate = 100;
-    public AudioClip[] audioArray;
+    public float firerate = 100;
+    //public AudioClip[] audioArray; kan bruges senere til lyd
 
-    float nextShotTime;
+    private float nextShotTime;
 
     void Start()
     {
@@ -21,14 +21,14 @@ public class Gun : MonoBehaviour
     {
         if (Time.time > nextShotTime)
         {
-            nextShotTime = Time.time + 1f / (fireRate / 60f);
+            nextShotTime = Time.time + 1f / (firerate / 60f);
             PoolMan.Instance.ReuseObject(projectile.gameObject, muzzle.position, muzzle.rotation);
             //PlaySound(projectileNb);
         }
     }
 
-    void PlaySound(int clip)
+    /*private void PlaySound(int clip)
     {
         GetComponent<AudioSource>().PlayOneShot(audioArray[clip]);
-    }
+    } */
 }

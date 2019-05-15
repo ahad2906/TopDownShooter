@@ -21,7 +21,8 @@ public class Player : LivingEntity
     }
     protected override void Start()
     {
-        //Temporary fix
+        //Da spilleren ikke instantieres med PoolMan (endnu)
+        //kaldes OnCreate() her i Start()
         OnCreate();
     }
 
@@ -73,6 +74,5 @@ public class Player : LivingEntity
     {
         //Bevæger vores spiller
         rigidBody.MovePosition(rigidBody.position + velocity * Time.fixedDeltaTime);
-        //rigidBody.velocity = velocity ;
     }
 }

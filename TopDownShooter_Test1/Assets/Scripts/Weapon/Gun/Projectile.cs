@@ -42,7 +42,7 @@ public class Projectile : MonoBehaviour, IPoolable
     }
 
 
-    void OnHitObject(Collider c, Vector3 hitPoint)
+    private void OnHitObject(Collider c, Vector3 hitPoint)
     {
         IDamageable damageableObject = c.GetComponent<IDamageable>();
         if (damageableObject != null)
