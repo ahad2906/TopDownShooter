@@ -5,19 +5,17 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class Player : LivingEntity
 {
-    public float moveSpeed = 5;
-    private bool isSprintng = true;
-
-    private Camera mainCamera;
+    public float moveSpeed = 5f;
+    public float sprintSpeed = 8f;
+    private bool isSprinting;
     private Gun gun;
     private Rigidbody rigidBody;
-    private Vector3 velocity, velocitySprint;
+    private Vector3 velocity;
 
     public override void OnCreate()
     {
         base.OnCreate();
 
-        mainCamera = Camera.main;
         rigidBody = GetComponent<Rigidbody>();
         gun = GetComponentInChildren<Gun>();
     }
@@ -33,8 +31,10 @@ public class Player : LivingEntity
 
         // Bevægelse
         Vector3 moveInput = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
-        velocity = moveInput.normalized * moveSpeed;
-        velocitySprint = moveInput.normalized * (moveSpeed * 2f);
+        //Checker om spilleren trykker sprint knappen
+        isSprinting = (Input.GetKey(KeyCode.Joystick1Button10) || Input.GetKey(KeyCode.LeftShift));
+        //Beregner velociteten
+        velocity = moveInput.normalized * ((isSprinting)? sprintSpeed : moveSpeed);
 
 
         // Retning af spilleren
@@ -62,7 +62,7 @@ public class Player : LivingEntity
 
 
         // Skydning
-        if ((Input.GetMouseButton(0) || Input.GetKey(KeyCode.Joystick1Button5)) && isSprintng == false)
+        if ((Input.GetMouseButton(0) || Input.GetKey(KeyCode.Joystick1Button5)) && isSprinting == false)
         {
             gun.Shoot();
         }
@@ -72,15 +72,7 @@ public class Player : LivingEntity
     void FixedUpdate()
     {
         //Bevæger vores spiller
-        if (Input.GetKey(KeyCode.Joystick1Button10) || Input.GetKey(KeyCode.LeftShift))
-        {
-            isSprintng = true;
-            rigidBody.MovePosition(rigidBody.position + velocitySprint * Time.fixedDeltaTime);
-        } else
-        {
-            isSprintng = false;
-            rigidBody.MovePosition(rigidBody.position + velocity * Time.fixedDeltaTime);
-        }
+        rigidBody.MovePosition(rigidBody.position + velocity * Time.fixedDeltaTime);
         //rigidBody.velocity = velocity ;
     }
 }
