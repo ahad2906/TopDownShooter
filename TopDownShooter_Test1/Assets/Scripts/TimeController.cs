@@ -9,15 +9,16 @@ public class TimeController : MonoBehaviour
 
     private bool paused = false;
 
+    Player player;
+
 
     void Start()
     {
-        Time.timeScale = 0;
+        //Time.timeScale = 0;
 
         pauseObjects = GameObject.FindGameObjectsWithTag("ShowOnPause");
 
         //hidePaused();
-
     }
 
     void Update()
@@ -36,6 +37,7 @@ public class TimeController : MonoBehaviour
             }
             paused = !paused;
         }
+
     }
 
     public void pauseControl()
