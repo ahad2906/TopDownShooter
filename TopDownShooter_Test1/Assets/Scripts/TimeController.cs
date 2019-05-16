@@ -9,9 +9,6 @@ public class TimeController : MonoBehaviour
 
     private bool paused = false;
 
-    Player player;
-
-
     void Start()
     {
         Time.timeScale = 0;

@@ -54,7 +54,8 @@ public class DungeonMaster : MonoBehaviour
         }
         //Checker at vi ikke har passeret det min antal rum
         //Ideen her er så at vælge et bossrum hvis det ikke er tilfældet
-        if (minNbOfRooms > roomCount){
+        //if (minNbOfRooms > roomCount){
+        if (true){
             roomCount++;
 
             if (curRoom != null){
