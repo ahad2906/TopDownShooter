@@ -4,7 +4,8 @@ using UnityEngine;
 
 public enum PowerUpsAvailable { shootSpeed, speedBoost, healthBoost}
 
-
+//Test af power-ups, burde i princippet bruges med PoolMan og implementere IPoolable
+//Samt deles op i klasser el lign.
 public class PowerUp : MonoBehaviour
 {
 
@@ -31,7 +32,8 @@ public class PowerUp : MonoBehaviour
     IEnumerator PickUp(Collider player)
     {
         Player playerStats = player.GetComponent<Player>();
-        Gun gunStats = player.GetComponent<Gun>();
+        Gun gunStats = playerStats.Gun;
+        transform.parent = player.transform;
 
         switch (powerUpType)
         {

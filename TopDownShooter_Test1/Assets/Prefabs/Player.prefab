@@ -232,8 +232,7 @@ MonoBehaviour:
   muzzle: {fileID: 7937429396419974556}
   projectile: {fileID: 5110156685589889777, guid: 6bd8d6d70a6e2b041aee5ed36ddb43b5,
     type: 3}
-  fireRate: 100
-  audioArray: []
+  firerate: 100
 --- !u!1 &7520138321815879182
 GameObject:
   m_ObjectHideFlags: 0
@@ -326,7 +325,7 @@ GameObject:
   - component: {fileID: 5965110823458626144}
   m_Layer: 9
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -394,6 +393,7 @@ MonoBehaviour:
   flashLength: 0.2
   rend: {fileID: 7520138321813676238}
   moveSpeed: 5
+  sprintSpeed: 8
 --- !u!114 &5965110823458626144
 MonoBehaviour:
   m_ObjectHideFlags: 0

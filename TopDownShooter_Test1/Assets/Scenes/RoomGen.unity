@@ -797,6 +797,7 @@ MonoBehaviour:
   - {fileID: 7160931771395004401, guid: 89ead30262fcfc0468637b500d291a93, type: 3}
   - {fileID: 3111729064479565031, guid: 40c096fe00c0a9b469804dab6730c69f, type: 3}
   - {fileID: 6761091947785598783, guid: 17d9297d8001a124485d9b9786076a6f, type: 3}
+  - {fileID: 8890969719161521237, guid: 3605b3373efb78e4f91b62eda3f0bfe8, type: 3}
   enemies:
   - {fileID: 7999037031416703538, guid: 522dd39134261814dad36565b50bb33d, type: 3}
 --- !u!4 &1383659189
@@ -823,6 +824,11 @@ PrefabInstance:
     - target: {fileID: 8482930921412799062, guid: 3924dd772a1cc6d46a7d6026239eff65,
         type: 3}
       propertyPath: m_Name
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 8482930921412799062, guid: 3924dd772a1cc6d46a7d6026239eff65,
+        type: 3}
+      propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 5650657420127110021, guid: 3924dd772a1cc6d46a7d6026239eff65,

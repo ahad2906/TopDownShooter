@@ -9,6 +9,9 @@ public class Player : LivingEntity
     public float sprintSpeed = 8f;
     private bool isSprinting;
     private Gun gun;
+    public Gun Gun{
+        get {return gun;}
+    }
     private Rigidbody rigidBody;
     private Vector3 velocity;
 
