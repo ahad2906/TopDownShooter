@@ -70,6 +70,12 @@ public class PoolMan
         return null;
     }
 
+    public void Reset()
+    {
+        poolLib = new Dictionary<int, Queue<PoolObject>>();
+        transform = null;
+    }
+
     public class PoolObject
     {
         private GameObject gameObject;

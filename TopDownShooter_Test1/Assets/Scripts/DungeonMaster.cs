@@ -25,6 +25,7 @@ public class DungeonMaster : MonoBehaviour
         Random.InitState(System.DateTime.Now.Millisecond);
         player = FindObjectOfType<Player>();
         poolMan = PoolMan.Instance;
+        poolMan.Reset();
         FillThePool(rooms, 1);
         FillThePool(enemies, 6);
         OnEnterDoor(Door.Side.Bottom);
