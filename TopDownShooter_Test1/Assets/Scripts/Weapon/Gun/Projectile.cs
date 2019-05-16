@@ -12,11 +12,6 @@ public class Projectile : MonoBehaviour, IPoolable
     private float _lifeTime;
     private float collisionOffset = .1f;
 
-    void Start()
-    {
-       
-    }
-
     void Update()
     {
         if ((_lifeTime -= Time.deltaTime) <= 0)
@@ -37,7 +32,6 @@ public class Projectile : MonoBehaviour, IPoolable
         if (Physics.Raycast(ray, out hit, moveDistance + collisionOffset, collisionMask, QueryTriggerInteraction.Collide))
         {
             OnHitObject(hit.collider, hit.point);
-            //Destroy(Instantiate(hitEffect.gameObject, hit.point, Quaternion.FromToRotation(Vector3.forward, transform.forward) * Quaternion.AngleAxis(180, Vector3.right)) as GameObject, hitEffect.startLifetime);
         }
     }
 

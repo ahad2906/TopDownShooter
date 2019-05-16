@@ -79,7 +79,7 @@ public class Enemy : LivingEntity
         hasTarget = false;
         currentState = State.Idling;
     }
-    // Kunne måske laves som en ekstern klasse så man kan skifte attack?
+    // Kunne måske laves i en ekstern klasse så man kan skifte attack?
     private IEnumerator Attack()
     {
         currentState = State.Attacking;
