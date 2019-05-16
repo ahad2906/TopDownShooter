@@ -29,7 +29,7 @@ public class Projectile : MonoBehaviour, IPoolable
         transform.Translate(Vector3.forward * Time.deltaTime * speed);
     }
 
-    void CheckCollisions(float moveDistance)
+    private void CheckCollisions(float moveDistance)
     {
         Ray ray = new Ray(transform.position, transform.forward);
         RaycastHit hit;
