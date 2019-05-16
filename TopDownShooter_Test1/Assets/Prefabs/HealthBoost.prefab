@@ -119,7 +119,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   powerUpType: 2
-  pickUpEffect: {fileID: 0}
+  pickUpEffect: {fileID: 8374492935128704909, guid: 563d65da8c30a7e44954092ab7b1a69a,
+    type: 3}
   shootSpeedMultiplier: 5
   speedBoostultiplier: 2
   healthBoostMultiplier: 2

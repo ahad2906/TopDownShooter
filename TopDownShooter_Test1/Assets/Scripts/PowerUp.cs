@@ -43,6 +43,8 @@ public class PowerUp : MonoBehaviour
 
                 yield return new WaitForSeconds(duration);
 
+                gunStats.firerate /= shootSpeedMultiplier;
+
                 Destroy(gameObject);
                 break;
 
@@ -53,6 +55,8 @@ public class PowerUp : MonoBehaviour
                 GetComponent<Collider>().enabled = false;
 
                 yield return new WaitForSeconds(duration);
+
+                playerStats.moveSpeed /= speedBoostultiplier;
 
                 Destroy(gameObject);
                 break;
