@@ -14,7 +14,7 @@ public class TimeController : MonoBehaviour
 
     void Start()
     {
-        //Time.timeScale = 0;
+        Time.timeScale = 0;
 
         pauseObjects = GameObject.FindGameObjectsWithTag("ShowOnPause");
 
